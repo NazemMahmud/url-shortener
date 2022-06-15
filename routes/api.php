@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\URLShortenerController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+/**
+ * Get URLs list
+ * Create Short URL
+ * Get original URL from shorten URL
+ *
+ */
+Route::prefix('url-shorten')->group(function () {
+    Route::post('/', [URLShortenerController::class, 'store'])->name('url-shorten.store');
+    Route::get('/', [URLShortenerController::class, 'index'])->name('url-shorten.index');
+    Route::get('/get-url/{hash}', [URLShortenerController::class, 'getOriginalUrl'])->name('url-shorten.showOriginal');
 });
+
+// This is only for test purpose: test google safe browsing lookup API
+Route::get('/check-url', [URLShortenerController::class, 'check'])->name('check');
