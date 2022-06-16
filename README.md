@@ -3,10 +3,11 @@
 
 # Table of Contents
 
-| No. | Title                         |
-|-----|-------------------------------|
-| 1   | [Todos](#todos)               |
-| 2   | [Installation](#installation) |
+| No. | Title                                                                |
+|-----|----------------------------------------------------------------------|
+| 1   | [Todos](#todos)                                                      |
+| 2   | [Installation](#installation)                                        |
+| 3   | [Google Safe Browsing Lookup API](#google-safe-browsing-loookup-api) |
 
 
 # Todos
@@ -32,3 +33,8 @@
 - Install npm packages: run `npm install`
 - Key generate: `php artisan key:generate`
 - Run migration: `php artisan migrate`
+
+
+# Google Safe Browsing Lookup API
+- Created an API key using my gmail
+- Required data, like, **CLIENT_ID**, **CLIENT_VERSION** and **API_KEY** for lookup API call is provided in `env.example` file

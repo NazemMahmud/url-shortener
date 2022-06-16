@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facade\URLSafeLookup;
 use App\Helpers\HttpHandler;
 use App\Http\Requests\UrlAddRequest;
 use App\Http\Resources\OriginalUrlResource;
@@ -97,8 +98,13 @@ class URLShortenerController extends Controller
      *
      * @return void
      */
-    public function check(): void
+    public function check()
     {
-        // TODO:
+        // TEST from here for malicious site: https://testsafebrowsing.appspot.com/
+         $url = "https://laravel.com/docs/8.x/facades";
+//        $url = "testsafebrowsing.appspot.com/s/phishing.html";
+        $result = URLSafeLookup::urlLookup($url); // URLSafeLookup
+        return $result['status'] === 200 ? [ "status" => $result['status'], "message" => "Safe"] :
+            [ "status" => $result['status'], "message" => $result['message']];
     }
 }
