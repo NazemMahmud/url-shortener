@@ -88,7 +88,7 @@ class URLShortenerController extends Controller
             return HttpHandler::successResponse(new OriginalUrlResource($response));
         }
 
-        return HttpHandler::errorMessage();
+        return HttpHandler::errorMessage('Something went wrong', 404);
     }
 
     /**
