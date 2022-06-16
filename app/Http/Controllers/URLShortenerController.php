@@ -45,8 +45,8 @@ class URLShortenerController extends Controller
      */
     public function index(Request $request): mixed
     {
-        $pageOffset = (isset($request->pageOffset)) ? (int) $request->pageOffset : null;
-        $orderBy = $request->orderBy ??  'DESC';
+        $pageOffset = (isset($request->pageOffset)) ? (int)$request->pageOffset : null;
+        $orderBy = $request->orderBy ?? 'DESC';
         $sortBy = $request->sortBy ?? 'id';
 
         return new $this->resourceCollection($this->repository->getAll($pageOffset, $orderBy, $sortBy));
@@ -63,15 +63,14 @@ class URLShortenerController extends Controller
     public function store(UrlAddRequest $request): JsonResponse
     {
         $requestData = $request->all();
-        $response = $this->repository->createResource($requestData);
 
-        if ($response) {
+        if ($response = $this->repository->createResource($requestData)) {
             // if data already exist then status code is not 201
             return isset($response['status']) ? HttpHandler::successResponse(new $this->resource($response['data']))
                 : HttpHandler::successResponse(new $this->resource($response), 201);
         }
 
-        return HttpHandler::errorMessage('Something went wrong', 400);
+        return HttpHandler::errorMessage();
     }
 
 
@@ -96,15 +95,14 @@ class URLShortenerController extends Controller
      * test google safe browsing lookup API
      * ONLY FOR TEST PURPOSE
      *
-     * @return void
+     * @return JsonResponse
      */
-    public function check()
+    public function check(): JsonResponse
     {
-        // TEST from here for malicious site: https://testsafebrowsing.appspot.com/
-         $url = "https://laravel.com/docs/8.x/facades";
-//        $url = "testsafebrowsing.appspot.com/s/phishing.html";
-        $result = URLSafeLookup::urlLookup($url); // URLSafeLookup
-        return $result['status'] === 200 ? [ "status" => $result['status'], "message" => "Safe"] :
-            [ "status" => $result['status'], "message" => $result['message']];
+        $url = "https://laravel.com/docs/8.x/facades";
+        // $url = "http://testsafebrowsing.appspot.com/s/phishing.html";
+        URLSafeLookup::urlLookup($url); // URLSafeLookup
+
+        return HttpHandler::successResponse(["message" => "Safe"]);
     }
 }

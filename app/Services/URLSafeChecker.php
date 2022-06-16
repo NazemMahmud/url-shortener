@@ -3,6 +3,8 @@
 namespace App\Services;
 
 
+use App\Exceptions\UnsafeURLException;
+
 class URLSafeChecker
 {
 
@@ -30,84 +32,49 @@ class URLSafeChecker
 
 
     /**
-     * POST data that will be sent to google safe lookup API
-     *
-     * @var string
-     */
-    private string $data;
-
-
-    /**
      * lookup the URL in google safe and return result accordingly
      *
      * @param string $url
-     * @return array
+     * @return void
+     * @throws UnsafeURLException
      */
-    public function urlLookup(string $url): array
+    public function urlLookup(string $url): void
     {
         $this->url = $url;
         $this->googleApiURL = "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" . env('GOOGLE_API_KEY') . "";
-        $this->setData();
 
         $this->sendPostData();
-
-        return !$this->curlResponse ? [
-            "message" => "Something is wrong with the site. Please try again",
-            "status" => 404 ] :
-            $this->formatResponse();
     }
 
     /**
      * format the response before return
      *
-     * @return array
+     * @return void
+     * @throws UnsafeURLException
      */
-    private function formatResponse(): array
+    private function throwUnsafeResponse(): void
     {
         $response = json_decode($this->curlResponse);
-        if (isset($response->matches))
-        {
-            foreach ($response->matches as $site)
-            {
-                return match ($site->threatType) {
-                    "MALWARE" => [
-                        "message" => "This site is a malware, not safe",
-                        "status" => 404
-                    ],
-                    "SOCIAL_ENGINEERING" => [
-                        "message" => "This site is for social engineering, not safe",
-                        "status" => 404
-                    ],
-                    "UNWANTED_SOFTWARE" => [
-                        "message" => "This site is a unwanted software, not safe",
-                        "status" => 404
-                    ],
-                    "POTENTIALLY_HARMFUL_APPLICATION" => [
-                        "message" => "This site is a potentially harmful application, not safe",
-                        "status" => 404
-                    ],
-                    default => [
-                        "message" => "This site is not safe",
-                        "status" => 404
-                    ],
-                };
-            }
+        if (isset($response->matches)) {
+            throw match ($response->matches[0]->threatType) {
+                "MALWARE" => new UnsafeURLException("This site is a malware, not safe"),
+                "SOCIAL_ENGINEERING" => new UnsafeURLException("This site is for social engineering, not safe"),
+                "UNWANTED_SOFTWARE" => new UnsafeURLException("This site is a unwanted software, not safe"),
+                "POTENTIALLY_HARMFUL_APPLICATION" => new UnsafeURLException("This site is a potentially harmful application, not safe"),
+                default => new UnsafeURLException("This site is not safe"),
+            };
         }
-
-        return [
-            "status" => 200
-        ];
     }
 
 
     /**
-     * Set post body data for CURL
+     * Get post body data for CURL
      *
-     * @return void
+     * @return string
      */
-    private function setData(): void
+    private function getData(): string
     {
-        $this->data = '{
+        return '{
                     "client": {
                       "clientId": "' . env('CLIENT_ID', 'url-shortener-checker') . '",
                       "clientVersion": "' . env('CLIENT_VERSION', '1.5.2') . '",
@@ -126,15 +93,18 @@ class URLSafeChecker
 
     /**
      * @return void
+     * @throws UnsafeURLException
      */
     private function sendPostData(): void
     {
+        $data = $this->getData();
+
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->googleApiURL);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json"));
         curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $this->data);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_FAILONERROR, true);
         curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
@@ -146,7 +116,9 @@ class URLSafeChecker
         curl_close($curl);
 
         if ($err) {
-            $this->curlResponse = false;
+            throw new UnsafeURLException("Something is wrong with the site. Please try again");
+        } else {
+            $this->throwUnsafeResponse();
         }
     }
 }

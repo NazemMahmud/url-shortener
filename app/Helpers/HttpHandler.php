@@ -13,7 +13,7 @@ class HttpHandler
      * @param int $statusCode
      * @return JsonResponse
      */
-    public static function errorMessage(string $message = 'Something went wrong', int $statusCode = 404): JsonResponse
+    public static function errorMessage(string $message = 'Something went wrong', int $statusCode = 400): JsonResponse
     {
         return response()->json([
             'error' => $message,

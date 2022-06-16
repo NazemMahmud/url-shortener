@@ -3,6 +3,7 @@
 
 namespace App\Repositories;
 
+use App\Facade\URLSafeLookup;
 use App\Models\URLShortener;
 use Illuminate\Support\Str;
 
@@ -33,8 +34,8 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     /**
      * New data entry
      * IF original URL exists, no need to save, just return
+     * Check with google safe browsing lookup
      * IF short code symbol match with another, try again
-     * Check with google safe browsing lookup [REMAINS]
      *
      * @param array $data
      * @return mixed
@@ -43,13 +44,14 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     {
         if ($existData = $this->getByColumn('original_url', $data['original_url'])) {
             return [
-                'data'=> $existData,
+                'data' => $existData,
                 'status' => 200 // because if data exist, then it is not created, just found
             ];
         }
 
-        $data['url_hash'] = $this->createHashCode();
+        URLSafeLookup::urlLookup($data['original_url']);
 
+        $data['url_hash'] = $this->createHashCode();
         return $this->model::create($data) ?? false;
     }
 

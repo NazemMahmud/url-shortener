@@ -28,7 +28,7 @@
 - For implementation use Laravel and Vue.js.
 
 # Installation
-
+- Laravel version `^8.0` is used. So, respective PHP version is pre-required to install
 - after git clone, run `composer install`
 - Install npm packages: run `npm install`
 - Key generate: `php artisan key:generate`
@@ -38,3 +38,5 @@
 # Google Safe Browsing Lookup API
 - Created an API key using my gmail
 - Required data, like, **CLIENT_ID**, **CLIENT_VERSION** and **API_KEY** for lookup API call is provided in `env.example` file
+- There is **an extra route added**, in order to test the lookup API is correctly implemented or not: Route path:: `http://localhost:port/api/check-url`\
+You will find more unsafe site link here: `https://testsafebrowsing.appspot.com/`
