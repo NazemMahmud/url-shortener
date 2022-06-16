@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HttpHandler;
 use App\Http\Requests\UrlAddRequest;
+use App\Http\Resources\OriginalUrlResource;
 use App\Http\Resources\UrlShortenerResource as ShortUrl;
 use App\Http\Resources\UrlShortenerResourceCollection;
 use App\Repositories\URLShortenerRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class URLShortenerController extends Controller
 {
@@ -36,14 +38,17 @@ class URLShortenerController extends Controller
 
 
     /**
-     * Get all now, later will make pagination if get time
-     *
+     * Get all / paginated data
+     * @param Request $request
      * @return mixed
      */
-    public function index(): mixed
+    public function index(Request $request): mixed
     {
-        // TODO:
-        return "";
+        $pageOffset = (isset($request->pageOffset)) ? (int) $request->pageOffset : null;
+        $orderBy = $request->orderBy ??  'DESC';
+        $sortBy = $request->sortBy ?? 'id';
+
+        return new $this->resourceCollection($this->repository->getAll($pageOffset, $orderBy, $sortBy));
     }
 
     /**
@@ -73,12 +78,17 @@ class URLShortenerController extends Controller
      * Get the original URL from shorten URL to redirect
      *
      * @param string $hash
-     * @return mixed
+     * @return JsonResponse
      */
-    public function getOriginalUrl(string $hash): mixed
+    public function getOriginalUrl(string $hash): JsonResponse
     {
-        // TODO:
-        return "";
+        $response = $this->repository->getByColumn('url_hash', $hash);
+
+        if ($response) {
+            return HttpHandler::successResponse(new OriginalUrlResource($response));
+        }
+
+        return HttpHandler::errorMessage();
     }
 
     /**
