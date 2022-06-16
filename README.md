@@ -7,7 +7,7 @@
 |-----|----------------------------------------------------------------------|
 | 1   | [Todos](#todos)                                                      |
 | 2   | [Installation](#installation)                                        |
-| 3   | [Google Safe Browsing Lookup API](#google-safe-browsing-loookup-api) |
+| 3   | [Google Safe Browsing Lookup API](#google-safe-browsing-lookup-api) |
 
 
 # Todos
