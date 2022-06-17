@@ -25,7 +25,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/url-shorten?pageOffset=10&page=2",
+					"raw": "{{BASE_URL}}/url-shorten",
 					"host": [
 						"{{BASE_URL}}"
 					],
