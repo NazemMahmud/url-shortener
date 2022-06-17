@@ -34,6 +34,8 @@
 - Install npm packages: run `npm install`
 - Key generate: `php artisan key:generate`
 - Run migration: `php artisan migrate`
+- Run server: `php artisan serve`
+- Run Vue: `npm run hot`
 
 
 # Google Safe Browsing Lookup API
@@ -45,7 +47,7 @@ You will find more unsafe site link here: `https://testsafebrowsing.appspot.com/
 
 # Unit Test
 - Run Tests: `php artisan test`
-- Check the test file in `tests/Unit/UrlShortenTest.php`. Add / Update any test method if you feel necessary.
+- Check the test file in `tests/Unit/UrlShortenTest.php`. You may add / update any test method if you feel necessary.
 
 ### Note:
 - _Normally unit tests code is written before the actual functions. But, here I wrote the tests code later_.

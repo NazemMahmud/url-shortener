@@ -10,7 +10,7 @@ const router = new Router({
     routes: [
         { path: '/', name: 'Main', component: Main },
         { path: '/:hashCode', name: 'Redirect', component: Redirect },
-        { path: '/*', name: 'PageNotFound', component: Redirect },
+        { path: '/*', name: 'Redirect', component: Redirect },
     ]
 });
 
