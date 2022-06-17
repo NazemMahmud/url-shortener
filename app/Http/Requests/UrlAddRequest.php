@@ -29,7 +29,7 @@ class UrlAddRequest extends FormRequest
 
         // since regex has a pipe in it, have to use an array instead of string,
         return [
-            'original_url' => ['required', 'string', 'min:9', 'regex:'.$regex],
+            'original_url' => ['required', 'string', 'regex:'.$regex],
         ];
     }
 

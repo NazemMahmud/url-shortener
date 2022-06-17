@@ -2,7 +2,9 @@
     <div class="container mt-4">
         <LoaderComponent :isLoading="isLoading" />
         <div class="row justify-content-center">
-            <AddComponent v-on:updateList="updateList($event)" v-on:loadStart="updateLoader($event)" />
+            <AddComponent v-on:updateList="updateList($event)"
+                          v-on:loadStart="updateLoader($event)"
+                          v-on:handleError="handleError($event)"/>
         </div>
 
         <div class="mt-4">
@@ -37,6 +39,7 @@ export default {
         }
     },
     methods: {
+        // get all items list
         getItemsList: async function () {
             this.updateLoader();
             // get all urls list
@@ -44,17 +47,39 @@ export default {
                 this.urlsList = res.data.data;
                 this.updateLoader();
             }).catch(error => {
-                console.log('error: ', error);
+                this.handleToast('Something went wrong', 'danger');
                 this.updateLoader();
             });
         },
         updateList: function (data) {
-            // update list item when new url shorten is added
+            // update list item when new url shorten is added,
+            // if URL is already added, just show toast message
+            let message = 'This Data already exist';
+            let variant = 'info';
+            if (!data.hasOwnProperty('message')) {
+                message = 'Data created successfully';
+                variant = 'success';
+            } else {
+                this.urlsList = this.urlsList.filter(item => item.original_url !== data.original_url);
+            }
             this.urlsList.unshift(data);
             this.updateLoader();
+            this.handleToast(message, variant);
         },
         updateLoader: function () {
             this.isLoading = !this.isLoading;
+        },
+        handleError: function (message) {
+            typeof message === 'object' ? message.forEach(elem => this.handleToast(elem, 'danger')) : this.handleToast(message, 'danger');
+            this.updateLoader();
+        },
+        handleToast: function (message, variant = 'default') {
+            this.$bvToast.toast(message, {
+                autoHideDelay: 2000,
+                variant: variant,
+                appendToast: false,
+                noCloseButton: true
+            })
         }
     },
     created() {

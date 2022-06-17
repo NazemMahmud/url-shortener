@@ -11,7 +11,9 @@
                             v-model="$v.form.originalUrl.$model"
                             :state="validateState('originalUrl')"></b-form-input>
 
-                    <b-button variant="primary" class="ml-5" size="sm" :disabled="!isFormValid" type="submit">Submit</b-button>
+                    <b-button variant="primary" class="ml-5" size="sm" :disabled="!isFormValid"
+                              :class="{disable: !isFormValid}"
+                              type="submit">Submit</b-button>
 
                     <b-form-invalid-feedback
                         id="input-1-live-feedback">
@@ -54,17 +56,17 @@ export default {
     },
     methods: {
         validateState(name) {
-            console.log('name: ', name);
             const { $dirty, $error } = this.$v.form[name];
-            return $dirty ? !$error : null;
+            this.isFormValid = $dirty ? !$error : null;
+            return this.isFormValid;
         },
         // on form submit action
         onSubmit: async function() {
-            this.$emit('loadStart');
+            this.$emit('loadStart'); // loading starts
             await createShortUrl({original_url: this.form.originalUrl}).then(res => {
                 this.$emit('updateList', res.data.data); // send data to main parent
             }).catch(error => {
-                console.log('error: ', error);
+                this.$emit('handleError', error.response.data.error); // send data to main parent
             });
         },
     },
@@ -72,5 +74,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .disable {
+        cursor: not-allowed;
+    }
 </style>
