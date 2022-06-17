@@ -67,4 +67,5 @@ Postman API collection is provided here:
 ```
 URL shortener.postman_collection.json
 ```
-- For environment Variable, use this environment: **URL shortener**
+**For environment Variable**, 
+- Set **BASE_URL** like, `http://localhost:port/api` 
