@@ -239,7 +239,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"original_url\": \"laravel\"\r\n}"
+					"raw": "{\r\n    \"original_url\": \"https://www.postman.com\"\r\n}"
 				},
 				"url": {
 					"raw": "{{BASE_URL}}/url-shorten",
@@ -650,14 +650,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{BASE_URL}}/url-shorten/get-url/PwfBKp",
+					"raw": "{{BASE_URL}}/url-shorten/get-url/2iLtB7",
 					"host": [
 						"{{BASE_URL}}"
 					],
 					"path": [
 						"url-shorten",
 						"get-url",
-						"PwfBKp"
+						"2iLtB7"
 					]
 				}
 			},
