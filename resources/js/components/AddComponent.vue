@@ -1,15 +1,22 @@
 <template>
     <div class="col-md-8">
         <div class="card">
-            <div class="card-body">
-                <b-form inline @submit.prevent="onSubmit">
-                    <b-form-input
-                        id="inline-form-input-name"
-                        class="mb-2 mr-sm-2 mb-sm-0 w-75"
-                        placeholder="Enter URL..."
-                        v-model="form.original_url"></b-form-input>
+            <div class="card-body" >
+                <b-form inline @submit.prevent="onSubmit" style="height: 62px;">
+                        <b-form-input
+                            id="inline-form-input-name"
+                            class="mb-2 mr-sm-2 mb-sm-0 w-75"
+                            required
+                            placeholder="https://example.com"
+                            v-model="$v.form.originalUrl.$model"
+                            :state="validateState('originalUrl')"></b-form-input>
 
                     <b-button variant="primary" class="ml-5" size="sm" :disabled="!isFormValid" type="submit">Submit</b-button>
+
+                    <b-form-invalid-feedback
+                        id="input-1-live-feedback">
+                        This field is required and must be an url
+                    </b-form-invalid-feedback>
                 </b-form>
             </div>
         </div>
@@ -18,25 +25,43 @@
 </template>
 
 <script>
+import { validationMixin } from "vuelidate";
+import { required, helpers } from "vuelidate/lib/validators";
 
 import {createShortUrl} from "../services/urlShortener.service";
+
+const url = helpers.regex('url', /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})$/i)
 
 export default {
     name: "AddComponent",
     props: ['items'],
+    mixins: [validationMixin],
     data() {
         return {
-            isFormValid: true,
+            isFormValid: false,
             form: {
-                original_url: '',
+                originalUrl: ""
+            },
+        }
+    },
+    validations: {
+        form: {
+            originalUrl: {
+                required,
+                url
             },
         }
     },
     methods: {
+        validateState(name) {
+            console.log('name: ', name);
+            const { $dirty, $error } = this.$v.form[name];
+            return $dirty ? !$error : null;
+        },
         // on form submit action
         onSubmit: async function() {
             this.$emit('loadStart');
-            await createShortUrl({original_url: this.form.original_url}).then(res => {
+            await createShortUrl({original_url: this.form.originalUrl}).then(res => {
                 this.$emit('updateList', res.data.data); // send data to main parent
             }).catch(error => {
                 console.log('error: ', error);
