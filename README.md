@@ -28,19 +28,18 @@
 6. Initially, if there is no data, there will be an empty card with text message, instead of a data table.
 7. Loader and Toast message is integrated.
 
-**Note:**
-- _Pagination is implemented only in back-end API._
-
 
 # Installation
-- For implementation used: **Laravel** and **Vue.js**
+- For implementation used: **Laravel**, **Vue.js** and **MySQL**
 - Laravel version `^8.0` is used. So, respective PHP version is pre-required to install
-- after git clone, run `composer install`
+- after git clone, copy `env.example` and paste as `.env` 
+- Install composer packages: run `composer install`
 - Install npm packages: run `npm install`
 - Key generate: `php artisan key:generate`
-- Run migration: `php artisan migrate`
+- Create the respective table: **url-shortener**. Then migrate: `php artisan migrate`
 - Run server: `php artisan serve`
 - Run Vue: `npm run hot`
+- You can dump existing data from [here](#mysql-data)
 
 
 # Google Safe Browsing Lookup API
@@ -68,3 +67,4 @@ Postman API collection is provided here:
 ```
 URL shortener.postman_collection.json
 ```
+- For environment Variable, use this environment: **URL shortener**
