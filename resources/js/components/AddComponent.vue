@@ -35,6 +35,7 @@ export default {
     methods: {
         // on form submit action
         onSubmit: async function() {
+            this.$emit('loadStart');
             await createShortUrl({original_url: this.form.original_url}).then(res => {
                 this.$emit('updateList', res.data.data); // send data to main parent
             }).catch(error => {
