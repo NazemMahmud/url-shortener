@@ -3,11 +3,12 @@
 
 # Table of Contents
 
-| No. | Title                                                                |
-|-----|----------------------------------------------------------------------|
-| 1   | [Todos](#todos)                                                      |
-| 2   | [Installation](#installation)                                        |
+| No. | Title                                                               |
+|-----|---------------------------------------------------------------------|
+| 1   | [Todos](#todos)                                                     |
+| 2   | [Installation](#installation)                                       |
 | 3   | [Google Safe Browsing Lookup API](#google-safe-browsing-lookup-api) |
+| 4   | [Unit Test](#unit-test)                                             |
 
 
 # Todos
@@ -40,3 +41,11 @@
 - Required data, like, **CLIENT_ID**, **CLIENT_VERSION** and **API_KEY** for lookup API call is provided in `env.example` file
 - There is **an extra route added**, in order to test the lookup API is correctly implemented or not: Route path:: `http://localhost:port/api/check-url`\
 You will find more unsafe site link here: `https://testsafebrowsing.appspot.com/`
+
+
+# Unit Test
+- Run Tests: `php artisan test`
+- Check the test file in `tests/Unit/UrlShortenTest.php`. Add / Update any test method if you feel necessary.
+
+### Note:
+- _Normally unit tests code is written before the actual functions. But, here I wrote the tests code later_.

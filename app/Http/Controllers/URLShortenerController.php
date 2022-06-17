@@ -66,7 +66,7 @@ class URLShortenerController extends Controller
 
         if ($response = $this->repository->createResource($requestData)) {
             // if data already exist then status code is not 201
-            return isset($response['status']) ? HttpHandler::successResponse(new $this->resource($response['data']))
+            return isset($response['status']) ? HttpHandler::successResponse($response['data'])
                 : HttpHandler::successResponse(new $this->resource($response), 201);
         }
 

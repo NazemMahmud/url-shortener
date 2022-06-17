@@ -14,18 +14,18 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     }
 
     /**
-     * Create a hash/unique short code (length 6)
+     * Generate a hash/unique short code (length 6)
      * if this code already exist in DB, try again
      * else return
      *
      * @return string
      */
-    public function createHashCode($idx = 0): string
+    public function generateHashCode(): string
     {
         $urlCode = Str::random(6);
 
         if ($this->checkUrlHash($urlCode)) {
-            return $this->createHashCode($idx);
+            return $this->generateHashCode();
         }
 
         return $urlCode;
@@ -43,15 +43,12 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     public function createResource(array $data): mixed
     {
         if ($existData = $this->getByColumn('original_url', $data['original_url'])) {
-            return [
-                'data' => $existData,
-                'status' => 200 // because if data exist, then it is not created, just found
-            ];
+            return $this->formatExistUrlData($existData);
         }
 
         URLSafeLookup::urlLookup($data['original_url']);
 
-        $data['url_hash'] = $this->createHashCode();
+        $data['url_hash'] = $this->generateHashCode();
         return $this->model::create($data) ?? false;
     }
 
@@ -93,5 +90,22 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     public function getByColumn(string $columnName, string $value): mixed
     {
         return $this->model::where($columnName, $value)->first();
+    }
+
+    /**
+     * @param object $data
+     * @return array
+     */
+    private function formatExistUrlData(object $data): array
+    {
+        return [
+            'data' => [
+                'id' => $data->id,
+                'original_url' => $data->original_url,
+                'url_hash' => $data->url_hash,
+                'message' => 'URL already exist'
+            ],
+            'status' => 200 // because if data exist, then it is not created, just found
+        ];
     }
 }
