@@ -1,0 +1,815 @@
+{
+	"info": {
+		"_postman_id": "ef3d78d4-efb4-4f7c-a535-78b4f62577be",
+		"name": "URL shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1449184"
+	},
+	"item": [
+		{
+			"name": "Get List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/url-shorten?pageOffset=10&page=2",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"url-shorten"
+					],
+					"query": [
+						{
+							"key": "pageOffset",
+							"value": "10",
+							"description": "Optional. Need for pagination. Per page how many data"
+						},
+						{
+							"key": "orderBy",
+							"value": "DESC",
+							"description": "Optional. Ascending or Descending order",
+							"disabled": true
+						},
+						{
+							"key": "sortBy",
+							"value": "id",
+							"description": "Optional. Order by specific column",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "2",
+							"description": "Optional. Need for pagination, indicate how many data will skip"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success: get all",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 18:28:45 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 18:28:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 24,\n            \"original_url\": \"https://www\",\n            \"url_hash\": \"NOQzI9\"\n        },\n        {\n            \"id\": 23,\n            \"original_url\": \"https://www.postman\",\n            \"url_hash\": \"G8i8F8\"\n        },\n        {\n            \"id\": 22,\n            \"original_url\": \"https://www.postman.com\",\n            \"url_hash\": \"edXzyw\"\n        },\n        {\n            \"id\": 21,\n            \"original_url\": \"https://laravel.com/docs/8.x\",\n            \"url_hash\": \"rNBbwg\"\n        },\n        {\n            \"id\": 20,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"2iLtB7\"\n        },\n        {\n            \"id\": 19,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"jhDhdZ\"\n        },\n        {\n            \"id\": 18,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"yOfyID\"\n        },\n        {\n            \"id\": 17,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"UH5Zj8\"\n        },\n        {\n            \"id\": 16,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"R3Jerp\"\n        },\n        {\n            \"id\": 15,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"Y9vh8D\"\n        },\n        {\n            \"id\": 9,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"BfAc3u\"\n        },\n        {\n            \"id\": 8,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"JVrUMt\"\n        },\n        {\n            \"id\": 7,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"0dNfff\"\n        },\n        {\n            \"id\": 6,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"nUE2Q8\"\n        },\n        {\n            \"id\": 5,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"USLaTy\"\n        },\n        {\n            \"id\": 4,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"O2CWBW\"\n        },\n        {\n            \"id\": 3,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"AXheba\"\n        },\n        {\n            \"id\": 2,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"1PpAGt\"\n        },\n        {\n            \"id\": 1,\n            \"original_url\": \"https://www.facebook.com\",\n            \"url_hash\": \"8s1fGJ\"\n        }\n    ],\n    \"status\": \"success\"\n}"
+				},
+				{
+					"name": "Success: Paginated data",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten?pageOffset=10&orderBy=DESC&sortBy=id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							],
+							"query": [
+								{
+									"key": "pageOffset",
+									"value": "10"
+								},
+								{
+									"key": "orderBy",
+									"value": "DESC"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Jun 2022 05:25:31 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Jun 2022 05:25:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 31,\n            \"original_url\": \"https://refactoring.guru/design-patterns\",\n            \"url_hash\": \"vqHO77\"\n        },\n        {\n            \"id\": 30,\n            \"original_url\": \"https://www.laravel.com/docs/7.x\",\n            \"url_hash\": \"4F1EEx\"\n        },\n        {\n            \"id\": 29,\n            \"original_url\": \"https://www.laravel.com/docs/8.x\",\n            \"url_hash\": \"PwfBKp\"\n        },\n        {\n            \"id\": 28,\n            \"original_url\": \"https://www.linkedin.com/feed\",\n            \"url_hash\": \"TigZ0m\"\n        },\n        {\n            \"id\": 27,\n            \"original_url\": \"https://www.udemy.com\",\n            \"url_hash\": \"K47SRy\"\n        },\n        {\n            \"id\": 26,\n            \"original_url\": \"https://vuejs.org/\",\n            \"url_hash\": \"fYD0b8\"\n        },\n        {\n            \"id\": 25,\n            \"original_url\": \"https://bootstrap-vue.org/docs/components/button\",\n            \"url_hash\": \"aSDS5o\"\n        },\n        {\n            \"id\": 24,\n            \"original_url\": \"https://www\",\n            \"url_hash\": \"NOQzI9\"\n        },\n        {\n            \"id\": 23,\n            \"original_url\": \"https://www.postman\",\n            \"url_hash\": \"G8i8F8\"\n        },\n        {\n            \"id\": 22,\n            \"original_url\": \"https://www.postman.com\",\n            \"url_hash\": \"edXzyw\"\n        }\n    ],\n    \"status\": \"success\",\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/url-shorten?page=1\",\n        \"last\": \"http://localhost:8000/api/url-shorten?page=3\",\n        \"prev\": null,\n        \"next\": \"http://localhost:8000/api/url-shorten?page=2\"\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 3,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/url-shorten?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": \"http://localhost:8000/api/url-shorten?page=2\",\n                \"label\": \"2\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/url-shorten?page=3\",\n                \"label\": \"3\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/url-shorten?page=2\",\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/url-shorten\",\n        \"per_page\": 10,\n        \"to\": 10,\n        \"total\": 26\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Add URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"original_url\": \"laravel\"\r\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/url-shorten",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"url-shorten"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"original_url\": \"https://www.postman.com\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 16:41:21 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 16:41:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 22,\n        \"original_url\": \"https://www.postman.com\",\n        \"url_hash\": \"edXzyw\"\n    },\n    \"status\": \"success\"\n}"
+				},
+				{
+					"name": "Validation Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"original_url\": \"http://laravelfdfdf\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 19:06:52 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 19:06:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": [\n        \"The original url format is invalid.\"\n    ],\n    \"status\": \"failed\"\n}"
+				},
+				{
+					"name": "Unsafe URL",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"original_url\": \"http://testsafebrowsing.appspot.com/s/phishing.html\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Jun 2022 10:28:13 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Jun 2022 10:28:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"This site is for social engineering, not safe\",\n    \"status\": \"failed\"\n}"
+				},
+				{
+					"name": "Error: Multiple Validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"original_url\": \"github\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 Jun 2022 03:15:11 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 Jun 2022 03:15:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": [\n        \"The original url must be at least 9 characters.\",\n        \"The original url format is invalid.\"\n    ],\n    \"status\": \"failed\"\n}"
+				},
+				{
+					"name": "Already exist URL",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"original_url\": \"https://www.postman.com\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 Jun 2022 03:51:40 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 17 Jun 2022 03:51:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 22,\n        \"original_url\": \"https://www.postman.com\",\n        \"url_hash\": \"edXzyw\",\n        \"message\": \"URL already exist\"\n    },\n    \"status\": \"success\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Original URL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/url-shorten/get-url/PwfBKp",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"url-shorten",
+						"get-url",
+						"PwfBKp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success: Get original URL",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten/get-url/2iLtB7",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten",
+								"get-url",
+								"2iLtB7"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 18:48:38 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 18:48:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"original_url\": \"https://www.facebook.com\"\n    },\n    \"status\": \"success\"\n}"
+				},
+				{
+					"name": "Error: Get Original URL",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/url-shorten/get-url/2iLtB",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"url-shorten",
+								"get-url",
+								"2iLtB"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 18:49:04 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Jun 2022 18:49:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Something went wrong\",\n    \"status\": \"failed\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Check safe url",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/check-url",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"check-url"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

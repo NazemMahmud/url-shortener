@@ -1,6 +1,6 @@
 <template>
-    <div class="mb-5 mt-5">
-        <b-table bordered hover="hover"
+    <div class="mt-5 mb-5">
+        <b-table bordered hover="hover" class="mb-0"
                  :items="items"
                  :fields="fields">
             <template #cell(url_hash)="data">

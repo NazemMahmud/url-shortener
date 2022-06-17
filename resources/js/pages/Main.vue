@@ -8,7 +8,11 @@
                           ref="addForm"/>
         </div>
 
-        <div class="mt-4">
+        <div class="row justify-content-center mt-4" v-if="!isLoading && !urlsList.length">
+            <NodataFound />
+        </div>
+
+        <div class="mt-4" v-if="!isLoading && urlsList.length">
             <ListComponent :items="urlsList" />
         </div>
 
@@ -18,8 +22,10 @@
 <script>
 
 import LoaderComponent from "../components/LoaderComponent";
+import NodataFound from "../components/NodataFound";
 import AddComponent from "../components/AddComponent";
 import ListComponent from "../components/ListComponent";
+
 import { getUrlsList } from "../services/urlShortener.service";
 
 export default {
@@ -27,7 +33,8 @@ export default {
     components: {
         AddComponent,
         ListComponent,
-        LoaderComponent
+        LoaderComponent,
+        NodataFound,
     },
     data() {
         return {
