@@ -4,7 +4,8 @@
         <div class="row justify-content-center">
             <AddComponent v-on:updateList="updateList($event)"
                           v-on:loadStart="updateLoader($event)"
-                          v-on:handleError="handleError($event)"/>
+                          v-on:handleError="handleError($event)"
+                          ref="addForm"/>
         </div>
 
         <div class="mt-4">
@@ -31,7 +32,6 @@ export default {
     data() {
         return {
             urlsList: [],
-            isFormValid: true,
             form: {
                 original_url: '',
             },
@@ -65,14 +65,18 @@ export default {
             this.urlsList.unshift(data);
             this.updateLoader();
             this.handleToast(message, variant);
+            this.$refs.addForm.resetForm();
         },
+        // show / hide loader
         updateLoader: function () {
             this.isLoading = !this.isLoading;
         },
+        // show error toast message/s
         handleError: function (message) {
             typeof message === 'object' ? message.forEach(elem => this.handleToast(elem, 'danger')) : this.handleToast(message, 'danger');
             this.updateLoader();
         },
+        // show hide toast box
         handleToast: function (message, variant = 'default') {
             this.$bvToast.toast(message, {
                 autoHideDelay: 2000,

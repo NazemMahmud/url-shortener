@@ -36,11 +36,11 @@ const url = helpers.regex('url', /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA
 
 export default {
     name: "AddComponent",
-    props: ['items'],
+    props: [],
     mixins: [validationMixin],
     data() {
         return {
-            isFormValid: false,
+            isFormValid: false, // to enable / disable submit button
             form: {
                 originalUrl: ""
             },
@@ -56,6 +56,7 @@ export default {
     },
     methods: {
         validateState(name) {
+            // form validation
             const { $dirty, $error } = this.$v.form[name];
             this.isFormValid = $dirty ? !$error : null;
             return this.isFormValid;
@@ -67,6 +68,16 @@ export default {
                 this.$emit('updateList', res.data.data); // send data to main parent
             }).catch(error => {
                 this.$emit('handleError', error.response.data.error); // send data to main parent
+            });
+        },
+        // reset form after successful submission
+        resetForm() {
+            this.form = {
+                originalUrl: ""
+            };
+
+            this.$nextTick(() => {
+                this.$v.$reset();
             });
         },
     },
