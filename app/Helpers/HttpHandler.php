@@ -36,4 +36,21 @@ class HttpHandler
         ], $statusCode);
     }
 
+    /**
+     * @param object $data
+     * @return array
+     */
+    public static function formatExistUrlData(object $data): array
+    {
+        return [
+            'data' => [
+                'id' => $data->id,
+                'original_url' => $data->original_url,
+                'url_hash' => $data->url_hash,
+                'message' => 'URL already exist'
+            ],
+            'status' => 200 // because if data exist, then it is not created, just found
+        ];
+    }
+
 }

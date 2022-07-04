@@ -15,6 +15,3 @@ Route::prefix('url-shorten')->group(function () {
     Route::get('/', [URLShortenerController::class, 'index'])->name('url-shorten.index');
     Route::get('/get-url/{hash}', [URLShortenerController::class, 'getOriginalUrl'])->name('url-shorten.showOriginal');
 });
-
-// This is only for test purpose: test google safe browsing lookup API
-Route::get('/check-url', [URLShortenerController::class, 'check'])->name('check');

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Facade\URLSafeLookup;
 use App\Helpers\HttpHandler;
 use App\Http\Requests\UrlAddRequest;
 use App\Http\Resources\OriginalUrlResource;
@@ -89,20 +88,5 @@ class URLShortenerController extends Controller
         }
 
         return HttpHandler::errorMessage('Something went wrong', 404);
-    }
-
-    /**
-     * test google safe browsing lookup API
-     * ONLY FOR TEST PURPOSE
-     *
-     * @return JsonResponse
-     */
-    public function check(): JsonResponse
-    {
-        $url = "https://laravel.com/docs/8.x/facades";
-        // $url = "http://testsafebrowsing.appspot.com/s/phishing.html";
-        URLSafeLookup::urlLookup($url); // URLSafeLookup
-
-        return HttpHandler::successResponse(["message" => "Safe"]);
     }
 }

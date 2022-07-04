@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Facade\URLSafeLookup;
+use App\Helpers\HttpHandler;
 use App\Models\URLShortener;
 use Illuminate\Support\Str;
 
@@ -43,7 +44,7 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     public function createResource(array $data): mixed
     {
         if ($existData = $this->getByColumn('original_url', $data['original_url'])) {
-            return $this->formatExistUrlData($existData);
+            return HttpHandler::formatExistUrlData($existData);
         }
 
         URLSafeLookup::urlLookup($data['original_url']);
@@ -90,22 +91,5 @@ class URLShortenerRepositoryEloquent implements URLShortenerRepositoryInterface
     public function getByColumn(string $columnName, string $value): mixed
     {
         return $this->model::where($columnName, $value)->first();
-    }
-
-    /**
-     * @param object $data
-     * @return array
-     */
-    private function formatExistUrlData(object $data): array
-    {
-        return [
-            'data' => [
-                'id' => $data->id,
-                'original_url' => $data->original_url,
-                'url_hash' => $data->url_hash,
-                'message' => 'URL already exist'
-            ],
-            'status' => 200 // because if data exist, then it is not created, just found
-        ];
     }
 }
